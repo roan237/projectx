@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - Kozhikode</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <style>
+    /* General Styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #000; /* Default: Night Mode */
+      color: #fff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background-color: #0047ab;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    nav .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      margin-right: 20px;
+      
+    }
+
+    nav .nav-links a,
+    nav .nav-links button {
+      text-decoration: none;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 1em;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-right: 20px;
+      
+    }
+
+    nav .nav-links a:hover,
+    nav .nav-links button:hover {
+      background-color: #003366;
+      margin-right: 20px;
+      
+    }
+
+    nav .nav-links button {
+      background-color: #0047ab;
+      margin-right: 20px;
+    }
+
+    nav .nav-links button.night-mode-toggle:hover {
+      background-color: #003366;
+      
+      
+    }
+
+    /* Main Content */
+    main {
+      padding: 20px;
+      margin-top: 80px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      text-align: center;
+    }
+
+    /* Section Titles */
+    .scrollable-section h2 {
+      
+      text-align: left; /* Align section titles to the left */
+      margin-left: 20px;
+    }
+
+    /* Search Box */
+    .search-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px auto 10px auto;
+    }
+
+    .search-container input {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid white;
+      border-radius: 20px 0 0 20px;
+      font-size: 1em;
+      outline: black;
+    }
+
+    .search-container button {
+      padding: 20px 20px;
+      background-color: #688eff;
+      color: black;
+      border: black;
+      border-radius: 0 20px 20px 0;
+      cursor: pointer;
+      font-size: 1em;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .search-container button:hover {
+      transform: scale(1.1);
+      background-color: white;
+    }
+
+    .search-container i {
+      position: absolute;
+      margin-left: -12px;
+      margin-block: -9px;
+      color: #181616;
+      font-size: 24px;
+    }
+
+    /* Scrollable Sections */
+    .scrollable-section {
+      margin-top: 10px;
+    }
+
+    .places-container {
+      display: flex;
+      overflow-x:auto;
+      gap: 30px;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .place-card {
+      min-width: 300px;
+      background-color: #003366;
+      border-radius: 10px;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 10px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .place-card img {
+      width: 70%;
+      border-radius: 5px;
+    }
+
+    .place-card h3 {
+      font-size: 1.2em;
+      margin: 5px 0;
+    }
+
+    .place-card p {
+      font-size: 0.9em;
+      color: #ccc;
+    }
+
+    .place-card:hover {
+      transform: scale(1.05);
+      background-color: #02122a;
+    }
+
+    @media (max-width: 100px) {
+      .places-container {
+        gap: 10px;
+      }
+
+      .place-card {
+        min-width: 300px;
+      }
+    }
+
+    .maplink{
+  background-color: #11045a;
+  border-radius: 100px;
+  box-shadow: rgba(2, 12, 87, 0.2) 0 -25px 18px -14px inset,rgba(2, 16, 95, 0.15) 0 1px 2px,rgba(0, 11, 94, 0.15) 0 2px 4px,rgba(1, 6, 83, 0.15) 0 4px 8px,rgba(13, 1, 79, 0.15) 0 8px 16px,rgba(17, 0, 77, 0.15) 0 16px 32px;
+  color: rgb(242, 242, 247);
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.maplink:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(0, 0, 90, 0.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(25, 2, 101, 0.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+    
+  </style>
+  <script>
+    function toggleNightMode() {
+      const body = document.body;
+      const isNightMode = body.style.backgroundColor === 'black';
+      body.style.backgroundColor = isNightMode ? 'white' : 'black';
+      body.style.color = isNightMode ? 'black' : 'white';
+    }
+  </script>
+
+</head>
+<body>
+  <nav>
+    <div class="logo">Kozhikode Explorer</div>
+    <div class="nav-links">
+      <a href="home.html">Home</a>
+      <a href="login.html">Login</a>
+      <a href="about.html">About Us</a>
+      <button class="night-mode-toggle" onclick="toggleNightMode()">Night Mode</button>
+    </div>
+  </nav>
+  <main>
+    <h1>Welcome to Kozhikode</h1>
+    <p style="text-align: center;">Explore the best places, hotels, beaches, and more in Kozhikode!</p>
+
+    <!-- Search Button -->
+    <div class="search-container">
+      <input type="text" placeholder="Search for places...">
+      
+      <button class="search-contain">
+        
+        
+        <i class='bx bx-search-alt-2'></i>
+      </button>
+    </div>
+
+    <!-- Top-Rated Places Section -->
+    <section class="scrollable-section" id="topRated">
+      <h2>Top-Rated Places in Kozhikode</h2>
+      <div class="places-container">
+        <div class="place-card">
+          <img src="https://i.ytimg.com/vi/VtZcuGTQWl4/maxresdefault.jpg" alt="Place">
+          <h3>KARIYATHUMPARA</h3>
+          <p>4.4</p><br>
+          <a href="https://maps.app.goo.gl/A94WRqSHFwj4o1f28">
+            <button class="maplink">LOCATE</button>
+      </a>
+      
+          
+        </div>
+        <div class="place-card">
+          <img src="https://i0.wp.com/foodntravel.in/wp-content/uploads/2022/12/3.jpg" alt="Place">
+          <h3>SOOFI MANDHI</h3>
+          <p>4.1</p><br>
+          <a href="https://maps.app.goo.gl/CRdFEPV5y8fbn4yHA">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://img.staticmb.com/mbcontent/images/crop/uploads/2022/10/Exterior-view-of-Hilite-Mall-Kozhikode_0_1200.jpg" alt="Place">
+          <h3>HILITE MALL</h3>
+          <p>4.4</p>
+          <a href="https://maps.app.goo.gl/AnBeurjGuVNTDEf99">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://rscpcalicut.org.in/uploads/banner/d83d35baf6b1c4a95edcf83f11fb00a9.jpg" alt="Place">
+          <h3>PLANETARIUM AND REGIONAL SCIENCE CENTRE</h3>
+          <p>4.3</p><br>
+          <a href="https://maps.app.goo.gl/8hDjBEzZGtM2jbx18">
+            <button  class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://img.onmanorama.com/content/dam/mm/en/travel/travel-news/images/2021/7/1/kozhikode-beach-main.jpg" alt="Place">
+          <h3>KOZHIKODE BEACH</h3>
+          <p>4.5</p><br><br>
+          <a href="https://maps.app.goo.gl/vRPPaopxkGAp6ToX6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://www.playspots.in/wp-content/uploads/2018/10/football.jpg" alt="Place">
+          <h3>MARACCANA TURF</h3>
+          <p>4.4</p><br>
+          <a href="https://maps.app.goo.gl/ap2bD2csAsPTzw9G6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://www.keralatourism.org/images/destination/large/thusharagiri_waterfalls_kozhikode20131031122022_269_1.jpg" alt="Place">
+          <h3>THUSHARAGIRI</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/Py8FbanPKDt9n6dA7">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://keralatourism.travel/images/destinations/places-to-visit/kozhikode/kadalundi-bird-sanctuary-kozhikode-kerala-tourism-entry-fee-timings-holidays-reviews-small.jpg" alt="Place">
+          <h3>KADALUNDI BIRD SANCTURY</h3>
+          <p>4.2</p><br><br>
+          <a href="https://maps.app.goo.gl/7yz1JMfoXS3jTg1r5">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Most Popular Places Section -->
+    <section class="scrollable-section" id="mostPopular">
+      <h2>Most Popular in Kozhikode</h2>
+      <div class="places-container">
+        <div class="place-card">
+          <img src="https://lh3.googleusercontent.com/p/AF1QipNPXROQz6Cz42Hi24Izz54RknwQN2eHqkyvcdLb" alt="Place">
+          <h3>MANACHIRA SQUARE</h3>
+          <p>4.2</p><br><br>
+          <a href="https://maps.app.goo.gl/aJinAffT1Y5zH94Q7">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://hblimg.mmtcdn.com/content/hubble/img/kozhikode/mmt/activities/m_Sarovaram%20Bio%20Park-1_l_382_510.jpg" alt="Place">
+          <h3>SAROVARAM BIOPARK</h3>
+          <p>3.9</p>
+          <a href="https://maps.app.goo.gl/jbVyi7NAAaS8D2WZ8">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://experiencekerala.in/image-uploads/1518577810.2.jpg" alt="Place">
+          <h3>KOZHIKODE BEACH</h3>
+          <p>4.5</p><br><br><br>
+          <a href="https://maps.app.goo.gl/vRPPaopxkGAp6ToX6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://i.ytimg.com/vi/DWyNo926uZk/maxresdefault.jpg" alt="Place">
+          <h3>LULU MALL</h3>
+          <p>4.0</p><br><br>
+          <a href="https://maps.app.goo.gl/wYyGMKQt7TBNDPKj9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://thefederal.com/file/2022/10/Paragon-restaurant.jpg" alt="Place">
+          <h3>PARAGON</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/mwqbk72FnWwnu2Be8">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="http://www.justkerala.in/wp-content/themes/justkerala/thumbimg.php?src=wp-content/uploads/2013/01/WelcomHotel-Raviz-Kadavu.jpg&w=735&h=350" alt="Place">
+          <h3>KADAVU RESORT</h3>
+          <p>4.2</p><br><br><br>
+          <a href="https://maps.app.goo.gl/QkvokN7EyuuK81CF9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://4.bp.blogspot.com/-kSylw1kUqZQ/WXLRPBzOlrI/AAAAAAAAMZs/nY2EtqcFheskArjWtHTPs4X8n61ys3-0gCLcBGAs/s1600/2.jpg" alt="Place">
+          <h3>KAPPAD BEACH</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/XGSGzKg3dZSwHiB5A">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://as1.ftcdn.net/v2/jpg/03/89/79/60/1000_F_389796056_sMdp0BO6qClyCxeMMLH91RJZ9v9SjxyR.jpg" alt="Place">
+          <h3>NAHDI KUZHIMANDHI</h3>
+          <p>4.3</p><br>
+          <a href="https://maps.app.goo.gl/M394X3euNSnd9VTG7">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+
+        </div>
+        </section>
+        <section class="scrollable-section" id="Beaches in Kozhikode">
+          <h2>Beaches in Kozhikode</h2>
+          <div class="places-container">
+            <div class="place-card">
+              <img src="https://img.onmanorama.com/content/dam/mm/en/travel/travel-news/images/2021/7/1/kozhikode-beach-main.jpg" alt="Place">
+              <h3>KOZHIKODE BEACH</h3>
+              <p>4.5</p><br><br>
+              <a href="https://maps.app.goo.gl/vRPPaopxkGAp6ToX6">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d5/18/2b/psx-20170319-125048-largejpg.jpg?w=1200&h=-1&s=1" alt="Place">
+              <h3>KAPPAD BEACH</h3>
+              <p>4.4</p><br><br>
+              <a href="https://maps.app.goo.gl/XGSGzKg3dZSwHiB5A">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://media-cdn.tripadvisor.com/media/photo-s/03/ec/d1/7c/kozhikode-beach.jpg" alt="Place">
+              <h3>BHATT ROAD BEACH</h3>
+              <p>4.3</p><br><br>
+              <a href="https://maps.app.goo.gl/J3AabY8gXrWSo9As6">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://media.holidify.com/images/cmsuploads/compressed/5b4de3d5-abca-4d93-bed0-caa12cd7c81c_20241023131425.jpg" alt="Place">
+              <h3>CHALIYAM BEACH</h3>
+              <p>4.4</p><br><br>
+              <a href="https://maps.app.goo.gl/8wKZGEiSdhB4a5b88">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://content.jdmagicbox.com/comp/kozhikode/e1/0495px495.x495.190820050901.q2e1/catalogue/varakkal-beach-west-hill-kozhikode-tourist-attraction-MBTCzMJBD1.jpg" alt="Place">
+              <h3>VARAKAL BEACH</h3>
+              <p>4.2</p><br><br><br>
+              <a href="https://maps.app.goo.gl/ZCRbcKno9pHNtWe68">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://www.citybit.in/wp-content/uploads/2023/10/Beypore-Beach.jpg" alt="Place">
+              <h3>BEYPORE BEACH</h3>
+              <p>4.3</p><br><br>
+              <a href="https://maps.app.goo.gl/ojANFPA3MqPstogb7">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://eu-assets.simpleview-europe.com/poole/imageresizer/?image=%2Fdmsimgs%2Fsandbanks-beach-birds-eye_1419847742.jpg&action=ProductDetail" alt="Place">
+              <h3>SAND BANKS</h3>
+              <p>4.3</p><br><br>
+              <a href="https://maps.app.goo.gl/zqG3aH5E5Bv3LSCq5">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+            <div class="place-card">
+              <img src="https://www.rural.tourism.gov.in/images/attraction/Thikkodi-Drive-in-Beach-2.jpg" alt="Place">
+              <h3>THIKKODI BEACH</h3>
+              <p>4,3</p><br><br><br>
+              <a href="https://maps.app.goo.gl/tnXJmqRSsyiwaw6A7">
+                <button class="maplink">LOCATE</button>
+          </a>
+            </div>
+    
+            </div>
+            </section>
+            <section class="scrollable-section" id="Restaurant and Hotels">
+              <h2>Restaurant and Hotels</h2>
+              <div class="places-container">
+                <div class="place-card">
+                  <img src="https://i0.wp.com/foodntravel.in/wp-content/uploads/2022/12/3.jpg" alt="Place">
+                  <h3>SOOFI MANDHI</h3>
+                  <p>4.1</p><br><br>
+                  <a href="https://maps.app.goo.gl/CRdFEPV5y8fbn4yHA">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://thefederal.com/file/2022/10/Paragon-restaurant.jpg" alt="Place">
+                  <h3>PARAGON</h3>
+                  <p>4.4</p><br><br>
+                  <a href="https://maps.app.goo.gl/mwqbk72FnWwnu2Be8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://as1.ftcdn.net/v2/jpg/03/89/79/60/1000_F_389796056_sMdp0BO6qClyCxeMMLH91RJZ9v9SjxyR.jpg" alt="Place">
+                  <h3>NAHDI KUZHIMANDHI</h3>
+                  <p>4.1</p><br>
+                  <a href="https://maps.app.goo.gl/M394X3euNSnd9VTG7">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://pinklungi.com/wp-content/uploads/2023/09/5-8-1024x576.jpg" alt="Place">
+                  <h3>KBC </h3>
+                  <p>4.3</p><br><br>
+                  <a href="https://maps.app.goo.gl/FpVkAHfR9V9Uxwub6">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://zaatarrestaurants.com/images/calicutzaatar(1).png" alt="Place">
+                  <h3>ZATAR RESTAURANT</h3>
+                  <p>4.0</p><br>
+                  <a href="https://maps.app.goo.gl/zFqgpjGi18tufJ8U8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/972/mandhi-house-family-restaurant-000-1638429254.webp" alt="Place">
+                  <h3>MANDHI HOUSE</h3>
+                  <p>4.1</p><br><br>
+                  <a href="https://maps.app.goo.gl/TPGYngcANbJ4vmeTA">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/103/rahma-1632557620-1636717929.webp" alt="Place">
+                  <h3>RAHMATH</h3>
+                  <p>4.3</p><br><br>
+                  <a href="https://maps.app.goo.gl/zGAkWEsbixrJkgtb8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://b.zmtcdn.com/data/pictures/4/19706234/1d9486a7c0c0498d63bf6d6d6b7c483e.jpg" alt="Place">
+                  <h3>TOPFORM</h3>
+                  <p>3.9</p><br><br>
+                  <a href="https://maps.app.goo.gl/jyTK8CmXwGcmjjm57">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://content.jdmagicbox.com/comp/kozhikode/m2/0495px495.x495.220330230524.r5m2/catalogue/suprabatham-pure-veg-restaurant-kozhikode-ho-kozhikode-pure-veg-restaurants-w4nixi7y4n.jpg" alt="Place">
+                  <h3>SUPRABATHAM VEG</h3>
+                  <p>4.0</p><br><br>
+                  <a href="https://maps.app.goo.gl/21aTi2qkFP6DTMRi6">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1370/sri-venkatesh-lunch-home-1645766651.webp" alt="Place">
+                  <h3>SRI VENKATESH LUNCH</h3>
+                  <p>4,0</p><br><br>
+                  <a href="https://maps.app.goo.gl/BBAtELasjyE7n4ZWA">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1331/edele-hotel-1645528488.webp" alt="Place">
+                  <h3>EDELE HOTEL</h3>
+                  <p>4.4</p><br><br>
+                  <a href="https://maps.app.goo.gl/KJnQ22au67okwB9L9">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2119/arabian-majlis-calicut-11025-1660823909.webp" alt="Place">
+                  <h3>ARABIAN MAJLIS</h3>
+                  <p>4.1</p><br><br>
+                  <a href="https://maps.app.goo.gl/m3BB6crBpQTdMF6o7">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://al-taza.com/assets/img/about_altaza.jpg" alt="Place">
+                  <h3>AL TAZA</h3>
+                  <p>4.2</p><br><br>
+                  <a href="https://maps.app.goo.gl/sBHhaZvEjthtgKwr8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+              
+  </div>
+  </section>
+  <section class="scrollable-section" id="Coolbars and cafe">
+    <h2>Coolbars and cafe</h2>
+    <div class="places-container">
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2127/ganesh-fruit-stall-and-juices-1-1660995245.webp" alt="Place">
+        <h3>GANESH FRUIT STALL</h3>
+        <p>4.4</p><br><br>
+        <a href="https://maps.app.goo.gl/uLcAm8FLmFG55EsH7">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2052/kalanthans-cool-bar-11-1660135262.webp" alt="Place">
+        <h3>KALANTHANS COOLBAR</h3>
+        <p>4.3</p><br><br>
+        <a href="https://maps.app.goo.gl/9XfLVjMyziupnKGQA">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://b.zmtcdn.com/data/pictures/5/20471485/bff572169ac2b3071105d1e50f128d6d.jpeg?fit=around|960:500&crop=960:500;," alt="Place">
+        <h3>OAKADALE JUICE HUB</h3>
+        <p>4.3</p><br><br>
+        <a href="https://maps.app.goo.gl/YZvKKymoPvxHsXXa9">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://content.jdmagicbox.com/comp/kozhikode/z9/0495px495.x495.230306140814.m2z9/catalogue/fruitbae-hilite-mall-eringallur-kozhikode-juice-centres-dueZwpIRZc.jpg" alt="Place">
+        <h3>FRUITBAE </h3>
+        <p>4.6</p>
+        <a href="https://maps.app.goo.gl/2QYFgKTkvhU4wN3K6">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://content.jdmagicbox.com/comp/kozhikode/b1/0495px495.x495.200908112449.d6b1/catalogue/cafe-ccj-kozhikode-0xpgqniotf.jpg" alt="Place">
+        <h3>CAFE MAVOOR</h3>
+        <p>4.5</p>
+        <a href="https://maps.app.goo.gl/JhLFX8KQChgvu9xC9">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1994/bun-club-365-1652958321.webp" alt="Place">
+        <h3>BUN CLUB</h3>
+        <p>4.5</p><br><br>
+        <a href="https://maps.app.goo.gl/BuVzyjLJfqHC4je66">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/0b/c5/0f/img-20191116-210232-largejpg.jpg?w=900&h=500&s=1" alt="Place">
+        <h3>DR.CAFE</h3>
+        <p>4.5</p><br><br>
+        <a href="https://maps.app.goo.gl/L8mVmHMQ5kuVFN12A">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://media-cdn.tripadvisor.com/media/photo-s/16/e8/bc/56/kadalas-cafe.jpg" alt="Place">
+        <h3>KADALAS CAFE</h3>
+        <p>3.5</p><br>
+        <a href="https://maps.app.goo.gl/n72Yvx7Aj9VnhkqD7">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2185/happy-cup-cafe-0166161-1662709863.webp" alt="Place">
+        <h3>HAPPY CUP</h3>
+        <p>4.2</p><br><br>
+        <a href="https://maps.app.goo.gl/4PNL67t7KqXAz7A79">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/10/eb/04/caption.jpg?w=900&h=500&s=1" alt="Place">
+        <h3>CANDID RESTO CAFE</h3>
+        <p>4.5</p><br><br>
+        <a href="https://maps.app.goo.gl/ZNGPMYY2gmixXatE9">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2949/lady7-1686899003.webp" alt="Place">
+        <h3>LADY LAOFELLA</h3>
+        <p>5.0</p><br><br>
+        <a href="https://maps.app.goo.gl/GXLgTK5Wh3618vaQA">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1974/sixth-avenue-cafe-01-3jpg-1650085877.webp" alt="Place">
+        <h3>SIXTH AVENUE CAFE</h3>
+        <p>4.0</p><br><br>
+        <a href="https://maps.app.goo.gl/sB7cbN55hakuzpX8A">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      <div class="place-card">
+        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/98/cd/b9/caption.jpg?w=500&h=300&s=1" alt="Place">
+        <h3>TEAMAX CAFE</h3>
+        <p>4.5</p><br>
+        <a href="https://maps.app.goo.gl/xVHQpXTaHWUpzABu9">
+            <button class="maplink">LOCATE</button>
+      </a>
+      </div>
+      </div></section>
+      <section class="scrollable-section" id="Historical monuments">
+        <h2>Historical monuments</h2>
+        <div class="places-container">
+          <div class="place-card">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_n0ZA2HKGjA8tgsdJnshH6c0z3VZW0UfMgUboxRswy-JLmqv0haSA-STY3KexfKDmBmU&usqp=CAU" alt="Place">
+            <h3>DEEPANJALI LAMP MUSEUM</h3>
+            <p>4.6</p><br><br>
+            <a href="V">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.keralatourism.org/_next/image/?url=http%3A%2F%2F127.0.0.1%2Fktadmin%2Fimg%2Fpages%2Ftablet%2Fregional-science-centre-and-planetarium-calicut-1729847890_2285a4d416c1f1d233a2.webp&w=1920&q=75" alt="Place">
+            <h3>REGIONAL SCINECE CENTRE AND PLANETARIUM</h3>
+            <p>4.3</p><br>
+            <a href="https://maps.app.goo.gl/8hDjBEzZGtM2jbx18">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://yometro.com/images/places/pazhassi-raja-museum-art-gallery.jpg" alt="Place">
+            <h3>PAZHASSIRAJA ARCHAEOLOGICAL MUSEUM</h3>
+            <p>4.3</p><br>
+            <a href="https://maps.app.goo.gl/QfWfhwReTVHMo2dz5">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://tripxl.com/blog/wp-content/uploads/2024/08/Museum-In-Kerala.jpg" alt="Place">
+            <h3>KRISHNAMENON MUSEUM</h3>
+            <p>4.1</p><br><br><br>
+            <a href="https://maps.app.goo.gl/VcYsMN3EEAwXnpi6A">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://explore.rehlat.ae/static/media/searchdestination/thingstodo/images/kozhikode/tali_temple/large_tali-temple.webp" alt="Place">
+            <h3>TALI TEMPLE</h3>
+            <p>4.7</p><br><br><br>
+            <a href="https://maps.app.goo.gl/zGo38zyHYwjudws5A">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.architectandinteriorsindia.com/cloud/2021/11/15/Freedom-Square-Clt-(17).jpg" alt="Place">
+            <h3>FREEDOM SQUARE</h3>
+            <p>4.5</p><br><br>
+            <a href="https://maps.app.goo.gl/5u2GBtafBteVuW4QA">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://th-i.thgim.com/public/incoming/b5eim6/article65951475.ece/alternates/FREE_1200/80692_29_9_2022_13_21_20_2_29TVKZTIPUSULTANFORT2.JPG" alt="Place">
+            <h3>TIPPU'S FORT</h3>
+            <p>3.6</p><br><br><br>
+            <a href="https://maps.app.goo.gl/DHTz9WR7ihzm4RYv6">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.keralatourism.org/images/malabar/static-banner/large/Mishkal_Mosque-16112019180335.jpg" alt="Place">
+            <h3>MISHKAL MOSQUE</h3>
+            <p>4.1</p><br><br><br>
+            <a href="https://maps.app.goo.gl/MNvsidPz2fhZJi6o7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://kirtads.kerala.gov.in/wp-content/uploads/photo-gallery/KIRTADS_Campus/6J5A1827.JPG" alt="Place">
+            <h3>KIRTADS</h3>
+            <p>4.2</p><br><br>
+            <a href="https://maps.app.goo.gl/Gd8DF8WUTQGDQjio7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.keralatourism.org/images/thalassery/static-banner/large/lokanarkavu-temple-18032020131703.jpg" alt="Place">
+            <h3>LOKANARKAVU TEMPLE</h3>
+            <p>4.7</p><br><br><br>
+            <a href="https://maps.app.goo.gl/w7eefUaa8fDmtEMZ9">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div></div>
+    </section>
+    <section class="scrollable-section" id="Hills and Viewpoints">
+      <h2>Hills and Viewpoints</h2>
+      <div class="places-container">
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1380/ponkunnu-hill-base-33-1645856424.webp" alt="Place">
+          <h3>PONKUNNU HILLS</h3>
+          <p>4.6</p><br><br>
+          <a href="https://maps.app.goo.gl/AGf9j8cSQZCf9gEU7">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1368/aanjilora-hills-362-1645762693.webp" alt="Place">
+          <h3>AANJILORA HILLS</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/HR8dMQguFScfNqz1A">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://lh5.googleusercontent.com/p/AF1QipNLOix3seUDrRY8JBGaFLtToxtal49n3C-sZBiz=w480-h300-k-n-rw" alt="Place">
+          <h3>VAZHAYUR HILLS</h3>
+          <p>4.3</p><br>
+          <a href="https://maps.app.goo.gl/z4hybgo4A2F9fwBk6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://files.yappe.in/place/full/muthuvara-hill-9248400.webp" alt="Place">
+          <h3>MUTHUVARA HILLS</h3>
+          <p>3.9</p><br><br>
+          <a href="https://maps.app.goo.gl/6RpGjWL25MtEbVFK6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1358/nambikulam-hill-topp-1645683214.webp" alt="Place">
+          <h3>NAMBIKULLAM HILLS</h3>
+          <p>4.8</p><br><br>
+          <a href="https://maps.app.goo.gl/H755KahtoNYe8UYx9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://files.yappe.in/place/full/kllriml-vyuu-pooyinrr-4565019.webp" alt="Place">
+          <h3>KALARI MALA VIEW POINT</h3>
+          <p>4.3</p>
+          <a href="https://maps.app.goo.gl/SobcfUeiB3XRvvXYA">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1062/karoonji-mala1-1642054555.webp" alt="Place">
+          <h3>KAROONJI MALA</h3>
+          <p>4.3</p><br><br>
+          <a href="https://maps.app.goo.gl/tUx1U9wV4XNFB9JPA">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/918/2019-06-30-1638179346.webp" alt="Place">
+          <h3>VAYALADA VIEW POINT</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/BDVviKK3RLUHUs2c9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1347/kashmir-kunnu333-1645608514.webp" alt="Place">
+          <h3>KASHMIR KUNNU</h3>
+          <p>4.2</p><br><br>
+          <a href="https://maps.app.goo.gl/deJuLdpjng9HvV999">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://files.yappe.in/place/full/karupparammal-hill-tourist-place-10853000.webp" alt="Place">
+          <h3>KARUPPARAMMAL HILLS</h3>
+          <p>3.5</p>
+          <a href="https://maps.app.goo.gl/QqMdwMFGCoUYyeXv8">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://kakkadampoyil.in/images/resource/news-4.jpg" alt="Place">
+          <h3>KAKKADAMPOYYIL</h3>
+          <p>4.3</p><br><br>
+          <a href="https://maps.app.goo.gl/KGcaQpZjhsZ1a1BP9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/7d/d5/38/aerial-view-of-kariyathumpara.jpg?w=900&h=-1&s=1" alt="Place">
+          <h3>KARIYATHUMPARA</h3>
+          <p>4.5</p><br><br>
+          <a href="https://maps.app.goo.gl/A94WRqSHFwj4o1f28">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1842/thonikadav-view-point1-1649138497.webp" alt="Place">
+          <h3>THONIKADAVU</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/pkoc9XTv6yRqN4Vd9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://media1.thrillophilia.com/filestore/lwpg003blovt3ygnpps6xjfbvuub_26949242884_20117fd66c_o.jpg?w=400&dpr=2" alt="Place">
+          <h3>VELLARIMALA</h3>
+          <p>4.1</p><br><br>
+          <a href="https://maps.app.goo.gl/vg95euTonqQm2KGd6">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/926/janakikad-ecotourism-center-maruthonkara-1638248498.webp" alt="Place">
+          <h3>JANAKI KAD</h3>
+          <p>4.2</p><br><br>
+          <a href="https://maps.app.goo.gl/q1rjFVPhwQ1egdnV8">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://th-i.thgim.com/public/news/national/kerala/37nr77/article32817374.ece/alternates/LANDSCAPE_1200/08tvwycamelhumpmountaincomplex" alt="Place">
+          <h3>AANAKKAMPOYIL</h3>
+          <p>4.2</p><br><br>
+          <a href="https://maps.app.goo.gl/jvoXREjW4H8GqFZC8">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        
+        <div class="place-card">
+          <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1381/ponparakunnu-hill-view-point-1122-1645857891.webp" alt="Place">
+          <h3>PONNPARAKUNNU</h3>
+          <p>4.4</p><br><br>
+          <a href="https://maps.app.goo.gl/EzqVEAFoXwsGYqC46">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div>
+        <div class="place-card">
+          <img src="https://img.onmanorama.com/content/dam/mm/en/travel/kerala/images/2021/11/7/kozhikode-trip3.jpg" alt="Place">
+          <h3>MEDAPARA</h3>
+          <p>4.1</p><br><br>
+          <a href="https://maps.app.goo.gl/4jXbF297HPtCw2Bc9">
+            <button class="maplink">LOCATE</button>
+      </a>
+        </div></div>
+      </section>
+      <section class="scrollable-section" id="Wetlands and Waterfalls">
+        <h2>Wetlands and Waterfalls</h2>
+        <div class="places-container">
+          <div class="place-card">
+            <img src="https://www.keralatourism.org/images/enchanting_kerala/large/arippara_waterfalls_a_hidden_gem20190927114806_951_1.jpg" alt="Place">
+            <h3>ARIPPARA WATERFALLS</h3>
+            <p>4.3</p><br><br>
+            <a href="https://maps.app.goo.gl/FQWHM6v2TK9X7hnb7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.sterlingholidays.com/activities/wayanad/mustsee/bannerimage/sterling-wayanad-tushargiri.jpg.imgw.1280.1280.jpeg" alt="Place">
+            <h3>TUSHARAGIRI WATERFALLS</h3>
+            <p>4.4</p><br><br>
+            <a href="https://maps.app.goo.gl/Py8FbanPKDt9n6dA7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://cdn.s3waas.gov.in/s382aa4b0af34c2313a562076992e50aa3/uploads/bfi_thumb/2018041793-1-olwa1632nr0zwlz2rj9o0rhw80ae2wz98eoq6lr9my.jpg" alt="Place">
+            <h3>KOZHIPPARA WATERHILLS</h3>
+            <p>4.1</p><br><br>
+            <a href="https://maps.app.goo.gl/U1gpZPQ8NzM7xxgE6">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://live.staticflickr.com/5834/20833526028_a6917d6159_b.jpg" alt="Place">
+            <h3>VAYALAD WATERFALLS</h3>
+            <p>4.5</p><br>
+            <a href="https://maps.app.goo.gl/gaMi73sabWmX3yjE7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://media-cdn.sygictraveldata.com/media/1200x630/612664395a40232133447d33247d383637383536373238" alt="Place">
+            <h3>VILANGAD WATERFALLS</h3>
+            <p>4.1</p><br><br>
+            <a href="https://maps.app.goo.gl/cJ6vCWXe8aCcLYMM6">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://th-i.thgim.com/public/migration_catalog/article10493839.ece/alternates/LANDSCAPE_1200/07ctmit02Mavoor8tvkz1mavur.jpg.jpg" alt="Place">
+            <h3>MAVOOR WETLANDS</h3>
+            <p>4.4</p><br><br>
+            <a href="https://maps.app.goo.gl/TiiuzG3s7cjPVgKg7">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.keralatourism.org/images/malabar/static-banner/large/Kadalundi-18022020051144.jpg" alt="Place">
+            <h3>KADALUNDI WETLANDS</h3>
+            <p>4.2</p><br><br>
+            <a href="https://maps.app.goo.gl/Rc6XZ9aB21V5w7Ac6">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://tripinic.com/wp-content/uploads/2020/10/Kalipoika-Sarovaram-Bio-Park-1-scaled-jpg.webp" alt="Place">
+            <h3>KALIPOIKA WETLANDS</h3>
+            <p>3.6</p><br><br><br>
+            <a href="https://maps.app.goo.gl/g22xkYoMoT4Ucab77">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://www.keralaorbit.in/assets/images/Kerala-orbit-images/Rivers/Korappuzhariver/Korappuzhariver%20(5).jpg" alt="Place">
+            <h3>KORAPUZHA</h3>
+            <p>4.2</p><br><br>
+            <a href="https://maps.app.goo.gl/QRvHYY9F1KHFdtg29">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>
+          <div class="place-card">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgkKcGGQRDgBywvw2fVrxrKm9pH8_6i1Htn4QalzpX2AeBt3_NhgQHBjJKszySgvij_bXdBCGpCTgN1smE1irrngPg7yMLSDuO9XfsD9pMpsgFljqdn-g9CeJ6cqgBgPqREZ4syQJ1V4p8/w1200-h630-p-k-no-nu/206022_237777646254041_862544_n.jpg" alt="Place">
+            <h3>CHALIYAR RIVER</h3>
+            <p>4.4</p><br><br>
+            <a href="https://maps.app.goo.gl/HF2eNDRpBLt6i78d8">
+                <button class="maplink">LOCATE</button>
+          </a>
+          </div>   
+            <div class="places-container">
+              <div class="place-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Mukkam_River.jpg" alt="Place">
+                <h3>IRUVAZHAINJI RIVER</h3>
+                <p>4.5</p>
+                <a href="https://maps.app.goo.gl/69XQk5MgTSH5pRmc7">
+                    <button class="maplink">LOCATE</button>
+              </a>
+              </div>
+              <div class="place-card">
+                <img src="https://www.keralatourism.org/images/malabar/static-banner/large/Kallayi-28022020105042.jpg" alt="Place">
+                <h3>KALLAYI PUZHA</h3>
+                <p>4.3</p><
+                <a href="https://maps.app.goo.gl/hRVJ6G2vsULMeafi9">
+                    <button class="maplink">LOCATE</button>
+              </a>
+              </div>
+              <div class="place-card">
+                <img src="https://www.keralatourism.org/images/enchanting_kerala/hri/Kakkayam_Dam_Kozhikode_1258.jpg" alt="Place">
+                <h3>KAKKAYAM DAM</h3>
+                <p>4.2</p>
+                <a href="https://maps.app.goo.gl/dDJNjAQCL3R19Szn6">
+                    <button class="maplink">LOCATE</button>
+              </a>
+              </div>
+              <div class="place-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6d0GRoihbPo-xh4A4pXXcbZV3mKHP6c9kZQ&s" alt="Place">
+                <h3>PERUVANNAMUZHI DAM</h3>
+                <p>4.1</p>
+                <a href="https://maps.app.goo.gl/ANytdC4fr3a1kf1U8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+              </div></div>
+            </section>
+            <section class="scrollable-section" id="Parks and Zoo">
+              <h2>Parks and Zoo</h2>
+              <div class="places-container">
+                <div class="place-card">
+                  <img src="https://th-i.thgim.com/public/news/cities/kozhikode/vaeglf/article28324789.ece/alternates/FREE_1200/09-KI-SAROVARAM-2" alt="Place">
+                  <h3>SAROVARAM BIO PARK</h3>
+                  <p>3.9</p>
+                  <a href="https://maps.app.goo.gl/jbVyi7NAAaS8D2WZ8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/2784/green-world-kakkodi-3-1688985370.webp" alt="Place">
+                  <h3>GREEN WORLD KAKKODI</h3>
+                  <p>4.3</p><br>
+                  <a href="https://maps.app.goo.gl/xz9RaiFUQgbMyHjG8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/372/1-1633318415.webp" alt="Place">
+                  <h3>KADALUNDI BIRD SANCTURY</h3>
+                  <p>4.2</p><br>
+                  <a href="https://maps.app.goo.gl/7yz1JMfoXS3jTg1r5">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://andamantourism.org.in/images/places-to-visit/header/gandhi-park-andaman-tourism-entry-fee-timings-holidays-reviews-header.jpg" alt="Place">
+                  <h3>GANDHI PARK</h3>
+                  <p>3.8</p><br><br>
+                  <a href="https://maps.app.goo.gl/BsGJEwccbSJBMv2f8">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://th-i.thgim.com/public/news/cities/kozhikode/6aqeiw/article35180101.ece/alternates/LANDSCAPE_1200/07tvkzbutroadbeachjpg" alt="Place">
+                  <h3>THEERAM BLISS PARK</h3>
+                  <p>4.3</p><br>
+                  <a href="https://maps.app.goo.gl/KUJAmYUCSoJwMAb87">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/860/07-1637754483.webp" alt="Place">
+                  <h3>VANAPARVAM BIO PARK</h3>
+                  <p>4.1</p><br>
+                  <a href="https://maps.app.goo.gl/1peNxrMtCB7aVtcU7">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div>
+                <div class="place-card">
+                  <img src="https://www.mediaoneonline.com/h-upload/2023/06/22/1375873-29246161-bd44-4a4a-b92c-d91de794e301.jpg" alt="Place">
+                  <h3>ACTIVE PLANET </h3>
+                  <p>4.3</p><br>
+                  <a href="https://maps.app.goo.gl/zjq3ESaTtUmucWvY6">
+                    <button class="maplink">LOCATE</button>
+              </a>
+                </div></div>
+              </section>
+              <section class="scrollable-section" id="Entertainments">
+                <h2>Entertainments</h2>
+                <div class="places-container">
+                  <div class="place-card">
+                    <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/92/5-1632567166-1636715697.webp" alt="Place">
+                    <h3>CROWN THEATRE</h3>
+                    <p>4.2</p><br>
+                    <a href="https://maps.app.goo.gl/RUppqQLsB4HcgQ9P8">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="data:image/jpeg;base64,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" alt="Place">
+                    <h3>REGAL CINEMAS</h3>
+                    <p>4.1</p><br>
+                    <a href="https://maps.app.goo.gl/ARc3SNFvmaAsCBgm9">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTwlTPqbBHQGaFG4rcscNgAuG2kE25LD1kpBg&s" alt="Place">
+                    <h3>PALAXI CINEMAS</h3>
+                    <p>4.0</p><br>
+                    <a href="https://maps.app.goo.gl/wgbMDyuiHNh3aWcj7">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://content.jdmagicbox.com/comp/kozhikode/f5/0495px495.x495.120515132400.y9f5/catalogue/rp-aashirvad-cineplexx-mavoor-road-kozhikode-multiplex-cinema-halls-dz6p.jpg" alt="Place">
+                    <h3>AASHIRVAD CINEPLEXX</h3>
+                    <p>3.8</p>
+                    <a href="https://maps.app.goo.gl/wm7Gv7AhyX2gbCgU6">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://assets-in.bmscdn.com/moviesmaster/assets/ackz/arc_fr-min_1704212399514.jpg" alt="Place">
+                    <h3>ARC CORONATION</h3>
+                    <p>3.6</p><br>
+                    <a href="https://maps.app.goo.gl/n2uoP1eUF5jPrzLVA">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/1527/forza-turf-footbal-1l-1647241086.webp" alt="Place">
+                    <h3>FORZA FOOTBALL TURF</h3>
+                    <p>3.8</p><br>
+                    <a href="https://maps.app.goo.gl/zLfekssUDDACucWU8">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://content.jdmagicbox.com/comp/kozhikode/c7/0495px495.x495.230309093327.e8c7/catalogue/lotto-football-turf-kozhikode-football-turf-grounds-sJ9MjZigfa.jpg" alt="Place">
+                    <h3>LOTTO FOOTBALL TURF</h3>
+                    <p>3.5</p><br>
+                    <a href="https://maps.app.goo.gl/SEzU5qt22n6JCE3p9">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                  </div>
+                  <div class="place-card">
+                    <img src="https://content.jdmagicbox.com/v2/comp/kannur/u3/9999px497.x497.240425223423.f7u3/catalogue/maracana-turf-kadirur-kannur-sports-ground-lVo6QJQSa0.jpg" alt="Place">
+                    <h3>MARACANA TURF</h3>
+                    <p>4.4/<p><br><br>
+                        <a href="https://maps.app.goo.gl/Dn7zHzorjv1K7cW28">
+                            <button class="maplink">LOCATE</button>
+                      </a>
+                  </div>
+                </section>
+                <section class="scrollable-section" id="Shopping complex">
+                  <h2>Shopping complex</h2>
+                  <div class="places-container">
+                    <div class="place-card">
+                      <img src="https://hiliterealty.com/wp-content/uploads/2019/08/HiLITE-MALL-banner.jpg" alt="Place">
+                      <h3>HiLITE MALL</h3>
+                      <p>4.4</p><br><br>
+                      <a href="https://maps.app.goo.gl/hmwATfjSUpzKmXzd9">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div>
+                    <div class="place-card">
+                      <img src="https://cdn2.advanceinfotech.org/kozhikode.directory/1200x675/business/23/focus-mall-1658310668.webp" alt="Place">
+                      <h3>FOCUS MALL</h3>
+                      <p>4.2</p><br>
+                      <a href="https://maps.app.goo.gl/2EBFD8v8wFr7VDiBA">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div>
+                    <div class="place-card">
+                      <img src="https://www.emaraldmall.com/webimages/banner_img1.jpg" alt="Place">
+                      <h3>EMARLD MALL</h3>
+                      <p>3.7</p><br><br>
+                      <a href="https://maps.app.goo.gl/VrwG7sd3criz6iZ19">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div>
+                    <div class="place-card">
+                      <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/a5/80/23/rp-mall.jpg?w=900&h=500&s=1" alt="Place">
+                      <h3>RP MALL</h3>
+                      <p>3.8</p><br>
+                      <a href="https://maps.app.goo.gl/BtZRH1eE1v27QUjd6">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div>
+                    <div class="place-card">
+                      <img src="https://gokulamgalleria.com/assets//front/images/mall-about.jpg" alt="Place">
+                      <h3>GOKULAM GALLERIA</h3>
+                      <p>4.3</p><br>
+                      <a href="https://maps.app.goo.gl/6tV9Qf94w2Wm5HPB7">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div>
+                    <div class="place-card">
+                      <img src="https://www.kozhikode.lulumall.in/wp-content/uploads/2023/07/lulu-mall-thiruvananthapuram.jpg" alt="Place">
+                      <h3>LULU MALL</h3>
+                      <p>4.0</p>
+                      <a href="https://maps.app.goo.gl/wYyGMKQt7TBNDPKj9">
+                        <button class="maplink">LOCATE</button>
+                  </a>
+                    </div></div>
+                  </section>                 
+  </main>
+</body>
+</html>
